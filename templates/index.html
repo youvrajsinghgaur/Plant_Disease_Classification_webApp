@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title%}Image Input{% endblock %}
+{% block css %}
+  <!-- Additional CSS specific to index.html -->
+  <style>
+    /* Custom CSS for index.html */
+    .form-container {
+        margin-top: 50px;
+    }
+    .result-container {
+        margin-top: 30px;
+    }
+    .result-card {
+        background-color: #fff; /* White background for result card */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow */
+        padding: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block body%}
+
+<div class="container mt-5">
+  <form class="col-6 mx-auto card p-3 shadow-lg" method='post' enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="container mt-4 text-center">
+        <h2>Plant Disease Classification</h2>
+      </div>
+      <hr>
+      <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"><span class="container mt-4">Upload Image</span></label>
+          <input name="plant_image" type="file" class="form-control">
+      </div>
+      <button type='submit' class="btn btn-success">Classify</button>
+  </form>
+
+  {% if output_class %}
+<div class="container mt-4 text-center">
+    <div class="col-6 mx-auto card p-3 shadow-lg">
+        <h2>Result of classification:</h2>
+        <p>{{ output_class }}</p>
+    </div>
+</div>
+{% endif %}
+</div>
+
+{% endblock %}
